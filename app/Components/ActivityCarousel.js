@@ -2,12 +2,14 @@ import React from 'react';
 import { StyleSheet, Text, View,TextInput } from 'react-native';
 import { Image } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+import axios from 'axios';
 import { AntDesign  } from '@expo/vector-icons'
 
 export default class CityCarousel extends React.Component {
   constructor(props){
     super();
     this.state = {
+
       errors: []
     }
 

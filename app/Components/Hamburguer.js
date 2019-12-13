@@ -35,7 +35,7 @@ class Hamburguer extends React.PureComponent {
                         </TouchableOpacity>
             }
         >
-          <MenuItem onPress={() => {this.redirect('ItinerariesScreen')}}>Itineraries</MenuItem>
+          <MenuItem onPress={() => {this.redirect('ActivityCarousel')}}>Itineraries</MenuItem>
           <MenuItem onPress={() => {this.redirect('Cities')}}>Cities</MenuItem>
           <MenuItem onPress={this.hideMenu} disabled>
             Itineraries

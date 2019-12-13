@@ -12,7 +12,6 @@ import ActivityCarousel from './ActivityCarousel'
 import User from "./User"
 import ItineraryScreen from './ItineraryScreen';
 import CityCarousel from './CityCarousel';
-import UserItinLikeScreen from './UserItinLikeScreen';
 
 //<Image source={require('./assets/2388994522.png')} style={{width:40, height:40}}/>
 
@@ -23,7 +22,6 @@ const AppNavigator = createStackNavigator({
     Profile: { screen: Profile },
     CreateAccount:{ screen: CreateAccountScreen },
     ActivityCarousel:{ screen: ActivityCarousel },
-    UserItinLike:{ screen: UserItinLikeScreen },
     Itinerary: {screen: ItineraryScreen},
     CityCarousel: {screen: CityCarousel}
  }

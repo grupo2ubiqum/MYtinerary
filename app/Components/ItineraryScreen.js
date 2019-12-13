@@ -17,7 +17,7 @@ export default class ItineraryScreen extends React.Component {
         this.state = {
             city: this.props.navigation.state.params.city,
             itineraries: [],
-            fav: "red",
+            fav: "black",
             type:"heart"
         }
     }
