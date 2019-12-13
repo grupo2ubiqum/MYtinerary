@@ -8,12 +8,10 @@ import Hamburguer from "./Hamburguer";
 import Profile from "./Profile";
 import LoginScreen from './LoginScreen';
 import CreateAccountScreen from './CreateAccountScreen';
-import ActivityCarousel from './ActivityCarousel'
-import User from "./User"
+import ActivityCarousel from './ActivityCarousel';
+import User from "./User";
 import ItineraryScreen from './ItineraryScreen';
 import CityCarousel from './CityCarousel';
-
-//<Image source={require('./assets/2388994522.png')} style={{width:40, height:40}}/>
 
 const AppNavigator = createStackNavigator({
     Home: { screen: HomeScreen },
@@ -28,13 +26,14 @@ const AppNavigator = createStackNavigator({
 ,  {
     defaultNavigationOptions : ({navigation}) => ({
     header:     (
-        <View style={{marginTop: StatusBar.currentHeight, height: StatusBar.currentHeight * 1.3, flexDirection:'row' , justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#ef3b36'}}>
+        <View>
+        <View style={{height: StatusBar.currentHeight * 1.2,  backgroundColor: '#ef3b36'}}></View>
+        <View style={{height: StatusBar.currentHeight, flexDirection:'row' , justifyContent: 'space-between', alignItems: 'flex-end', backgroundColor: '#ef3b36'}}>
             <Profile navigation={navigation} />        
             <Hamburguer navigation={navigation} />
+        </View>
         </View> )
     })
- } 
-
-);
+});
 
 export default AppNavigator;

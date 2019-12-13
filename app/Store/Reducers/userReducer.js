@@ -36,6 +36,7 @@ export default (state = initialState, action) => {
         }
 
         case "LOG_OUT_USER": {
+            
 
             AsyncStorage.clear()
 

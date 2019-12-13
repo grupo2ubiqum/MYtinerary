@@ -37,3 +37,7 @@ export const logUser = (user) => dispatch => {
         })
 
 } 
+
+export const logOut = () => dispatch => {
+    dispatch(logOutUser());
+} 
