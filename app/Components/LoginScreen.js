@@ -99,9 +99,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: 'lightgrey',
         padding: 20,
-        // justifyContent: 'center'
         justifyContent: 'space-between'
     },
     logoSolo: {
@@ -124,14 +122,12 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#3399FF',
-        // borderBottomColor: '#737373',
         borderBottomWidth: StyleSheet.hairlineWidth,
         alignItems: 'center',
         height: 20,
         width: 60,
         justifyContent: 'center',
         alignSelf: 'center'
-        // marginBottom: 10
     },
     colortextbutton: {
         color: 'white'

@@ -2,10 +2,9 @@ import React from 'react';
 import axios from 'axios'
 import { Text, View, ScrollView } from 'react-native';
 import { List, ListItem } from 'react-native-elements'
-import { FlatList } from 'react-native';
-// import { ScrollView } from 'react-native-gesture-handler';
+// import { FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import Comentarios from './Comentarios'
+// import Comentarios from './Comentarios'
 import ImageWithName from './ImageWithName'
 
 export default class ItineraryScreen extends React.Component {

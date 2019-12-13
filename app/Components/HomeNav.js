@@ -8,12 +8,10 @@ import Hamburguer from "./Hamburguer";
 import Profile from "./Profile";
 import LoginScreen from './LoginScreen';
 import CreateAccountScreen from './CreateAccountScreen';
-import User from "./User"
+// import User from "./User"
 import ItineraryScreen from './ItineraryScreen';
 import CityCarousel from './CityCarousel';
-import UserItinLikeScreen from './UserItinLikeScreen';
-
-//<Image source={require('./assets/2388994522.png')} style={{width:40, height:40}}/>
+// import UserItinLikeScreen from './UserItinLikeScreen';
 
 const AppNavigator = createStackNavigator({
     Home: { screen: HomeScreen },
