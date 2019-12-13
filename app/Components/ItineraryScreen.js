@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios'
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView,TouchableHighlight } from 'react-native';
 import { List, ListItem } from 'react-native-elements'
-// import { FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-// import Comentarios from './Comentarios'
-import ImageWithName from './ImageWithName'
+import Comentarios from './Comentarios';
+import ImageWithName from './ImageWithName';
+
 
 export default class ItineraryScreen extends React.Component {
     constructor(props) {
@@ -15,9 +16,13 @@ export default class ItineraryScreen extends React.Component {
 
         this.state = {
             city: this.props.navigation.state.params.city,
-            itineraries: []
+            itineraries: [],
+            fav: "red",
+            type:"heart"
         }
     }
+    
+
 
     async componentDidMount() {
         var city_name = this.state.city.name;
@@ -26,6 +31,7 @@ export default class ItineraryScreen extends React.Component {
     }
 
     render = () => {
+
         return (
 
             <ScrollView>
@@ -47,13 +53,20 @@ export default class ItineraryScreen extends React.Component {
                                     <Text>{user.duration}</Text>
                                     <Text>{user.price}</Text>
                                     <Text>{user.hashtags}</Text>
-
-
                                 </View>
                             }
-
                             leftAvatar={{ source: { uri: user.userPhoto } }}
-                            rightAvatar={<AntDesign name="hearto" size={30} color='black' />}
+                            rightAvatar={
+                                <TouchableHighlight
+                                    // style={styles.button}
+                                    onPress={
+                                        () => {
+                                            if(this.state.fav === "red")
+                                                return this.setState({fav: "black", type:"hearto"})
+                                            else return this.setState({fav: "red", type:"heart"})
+                                        }} >
+                                    <AntDesign name ={this.state.type} size={30} color={this.state.fav} />
+                                </TouchableHighlight>}
                             // Component={Comentarios}
                             bottomDivider
 

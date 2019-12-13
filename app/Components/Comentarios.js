@@ -21,7 +21,6 @@ class Comentarios extends React.PureComponent {
      }
 
     DeleteComment(comentario){
-
       let comentarios = this.state.comentarios
       nuevoscomentarios = comentarios.filter(comment => {
         return comment != comentario

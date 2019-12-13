@@ -8,7 +8,8 @@ import Hamburguer from "./Hamburguer";
 import Profile from "./Profile";
 import LoginScreen from './LoginScreen';
 import CreateAccountScreen from './CreateAccountScreen';
-// import User from "./User"
+import ActivityCarousel from './ActivityCarousel'
+import User from "./User"
 import ItineraryScreen from './ItineraryScreen';
 import CityCarousel from './CityCarousel';
 // import UserItinLikeScreen from './UserItinLikeScreen';
@@ -19,6 +20,7 @@ const AppNavigator = createStackNavigator({
     Login: { screen: LoginScreen },
     Profile: { screen: Profile },
     CreateAccount:{ screen: CreateAccountScreen },
+    ActivityCarousel:{ screen: ActivityCarousel },
     Itinerary: {screen: ItineraryScreen},
     CityCarousel: {screen: CityCarousel}
  }
