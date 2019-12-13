@@ -1,0 +1,7 @@
+import React, { Component } from 'react'
+import { Image } from 'react-native'
+
+const ImagesExample = () => (
+   <Image source = {require('C:/Users/tomas.stancanelli/Desktop/FinDelCurso/Mytinerary-1/app/assets/img/amsterdam.jpg')} />
+   )
+export default ImagesExample
