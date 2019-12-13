@@ -27,15 +27,20 @@ class LoginScreen extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit() {
+    redirect = (screen) => {
+        const { navigate } = this.props.navigation;
+        navigate(screen);
+    }
 
+    handleSubmit() {
         this.props.logUserNow(this.state)
             .then((data) => {
 
                 if (data === false) {
 
                     alert("You are successfully logged!");
-                    //                    this.props.history.push("/index");
+                    this.props.navigation.navigate('Home');
+                    
 
                 } else {
 

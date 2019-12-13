@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Button, View, StyleSheet, Image, ScrollView,TouchableOpacity} from 'react-native';
+import { Text, Button, View, StyleSheet, Image, ScrollView,TouchableOpacity,AsyncStorage} from 'react-native';
 import CityCarousel from './CityCarousel';
 
 
@@ -7,6 +7,7 @@ class HomeScreen extends React.Component {
     static navigationOptions = {
         title: '#teamwork',
     };
+
     render() {
         const { navigate } = this.props.navigation;
         return (
