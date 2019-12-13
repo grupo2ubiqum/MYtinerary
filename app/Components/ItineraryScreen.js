@@ -127,8 +127,8 @@ class ItineraryScreen extends React.Component {
 
                                 }
 
-                                // Component={Comentarios}
-                                bottomDivider
+                                
+                                
 
                             />
 
@@ -140,7 +140,7 @@ class ItineraryScreen extends React.Component {
                         <Text>No itineraries available for this city</Text>
 
                     }
-
+<Comentarios />
                 </View>
             </ScrollView>
         );
