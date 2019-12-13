@@ -25,6 +25,8 @@ class ItineraryScreen extends React.Component {
         }
 
         this.addComment = this.addComment.bind(this)
+        this.deleteComment = this.deleteComment.bind(this)
+
     }
 
     async componentDidMount() {
@@ -78,6 +80,10 @@ class ItineraryScreen extends React.Component {
 
     async addComment() {
 
+        if(this.props.user.username.length == 0) {
+            alert("Please log in to add comments")
+            return
+        }
         var city_name = this.state.city.name;
 
         await axios.put(`https://mytinerary-grupo2.herokuapp.com/api/itineraries/${city_name}`, this.state)
@@ -88,8 +94,12 @@ class ItineraryScreen extends React.Component {
 
     async deleteComment(comentario, index, title) {
 
-        var city_name = this.state.city.name;
+        if(this.props.user.username.length == 0){
+            alert("Please log in to delete comments")
+            return
+        }
 
+        var city_name = this.state.city.name;
 
         axios.post(`https://mytinerary-grupo2.herokuapp.com/api/itineraries/del/${city_name}`, {
             key: index,
