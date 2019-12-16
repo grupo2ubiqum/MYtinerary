@@ -60,7 +60,7 @@ export default class CityCarousel extends React.Component {
   }
 
   _renderItem = ( {item, index} ) => {
-    console.log("ARRAY",item)
+    //console.log("ARRAY",item)
   
     return (
       <View style={styles.container}>

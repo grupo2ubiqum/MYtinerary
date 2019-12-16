@@ -26,12 +26,20 @@ const AppNavigator = createStackNavigator({
 ,  {
     defaultNavigationOptions : ({navigation}) => ({
     header:     (
-        <View>
-        <View style={{height: StatusBar.currentHeight * 1.2,  backgroundColor: '#ef3b36'}}></View>
-        <View style={{height: StatusBar.currentHeight, flexDirection:'row' , justifyContent: 'space-between', alignItems: 'flex-end', backgroundColor: '#ef3b36'}}>
-            <Profile navigation={navigation} />        
-            <Hamburguer navigation={navigation} />
-        </View>
+        <View style={{shadowColor: "#000", 
+            shadowOffset: {
+                width: 0,
+                height: 5,
+            },
+            shadowOpacity: 0.34,
+            shadowRadius: 6.27,
+            
+            elevation: 10}}>
+            <View style={{height: StatusBar.currentHeight * 1.2,  backgroundColor: '#ef3b36' }} />
+            <View style={{height: StatusBar.currentHeight, flexDirection:'row' , justifyContent: 'space-between', alignItems: 'flex-end', backgroundColor: '#ef3b36'}}>
+                    <Profile navigation={navigation} />        
+                    <Hamburguer navigation={navigation} />
+            </View>
         </View> )
     })
 });

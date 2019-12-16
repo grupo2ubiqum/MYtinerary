@@ -1,12 +1,13 @@
 import React from 'react';
 import axios from 'axios'
-import { Text, View, ScrollView, TouchableHighlight } from 'react-native';
+import { Text, View, ScrollView, TouchableHighlight, StyleSheet, TextInput } from 'react-native';
 import { List, ListItem } from 'react-native-elements'
 import { FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import Comentarios from './Comentarios'
-import ImageWithName from './ImageWithName'
+import Comentarios from './Comentarios';
+import ImageWithName from './ImageWithName';
 import { connect } from "react-redux";
+import ActivityCarousel from './ActivityCarousel';
 
 class ItineraryScreen extends React.Component {
 
@@ -21,19 +22,22 @@ class ItineraryScreen extends React.Component {
             fav: "black",
             type:"heart"
         }
-    }
-    
 
+        this.addComment = this.addComment.bind(this)
+        this.deleteComment = this.deleteComment.bind(this)
+
+    }
 
     async componentDidMount() {
         var city_name = this.state.city.name;
         const data = await axios.get(`https://mytinerary-grupo2.herokuapp.com/api/itineraries/${city_name}`)
         this.setState({ itineraries: data.data.itinerariesForACity })
+
     }
 
     checkFavourites(itinerary) {
 
-        if (!itinerary.favouriteUsers || !this.props.user) {
+        if (!itinerary.favouriteUsers || this.props.user.username.length === 0) {
             return "black"
         }
 
@@ -71,9 +75,40 @@ class ItineraryScreen extends React.Component {
             this.setState({ itineraries: data.data.itinerariesForACity })
 
         }
+    }
+
+    async addComment() {
+
+        if(this.props.user.username.length == 0) {
+            alert("Please log in to add comments")
+            return
+        }
+        var city_name = this.state.city.name;
+
+        await axios.put(`https://mytinerary-grupo2.herokuapp.com/api/itineraries/${city_name}`, this.state)
+            .then(response => this.setState({ itineraries: response.data.itinerariesForACity }))
+            .catch(error => console.log(error))
 
     }
 
+    async deleteComment(comentario, index, title) {
+
+        if(this.props.user.username.length == 0){
+            alert("Please log in to delete comments")
+            return
+        }
+
+        var city_name = this.state.city.name;
+
+        axios.post(`https://mytinerary-grupo2.herokuapp.com/api/itineraries/del/${city_name}`, {
+            key: index,
+            comment: comentario,
+            title: title
+        })
+            .then(response => this.setState({ itineraries: response.data.itinerariesForACity }))
+            .catch(error => console.log(error))
+
+    }
 
     render = () => {
 
@@ -94,6 +129,9 @@ class ItineraryScreen extends React.Component {
                                 subtitle={
 
                                     <View>
+{console.log(user.activities)}
+                                        <ActivityCarousel />
+
                                         <Text>{user.country}</Text>
                                         <Text>{user.city}</Text>
                                         <Text>{user.title}</Text>
@@ -101,6 +139,35 @@ class ItineraryScreen extends React.Component {
                                         <Text>{user.duration}</Text>
                                         <Text>{user.price}</Text>
                                         <Text>{user.hashtags}</Text>
+
+
+                                        {user.comments.map((comentario, index) => {
+                                            return (
+                                                <View key={index}>
+                                                    <Text>{comentario}</Text>
+                                                    <TouchableHighlight
+                                                        style={styles.button}
+                                                        onPress={
+                                                            () => this.deleteComment(comentario, index, user.title)} >
+                                                        <Text style={styles.textButton}>Delete</Text>
+                                                    </TouchableHighlight>
+                                                </View>
+                                            )
+
+
+                                        })}
+
+                                        <TextInput
+                                            style={styles.input}
+                                            onChangeText={(text) => this.setState({ newComment: text, itineraryCommented: user.title })}
+                                        >
+                                        </TextInput>
+
+                                        <TouchableHighlight
+                                            style={styles.button}
+                                            onPress={this.addComment} >
+                                            <Text style={styles.textButton}>Comment</Text>
+                                        </TouchableHighlight>
 
 
                                     </View>
@@ -121,13 +188,14 @@ class ItineraryScreen extends React.Component {
                                                     this.changeFavourites(user, false)
                                                 }
 
-                                            }} >
+                                            }}
+                                        {...this.state.isLoggedIn}
+                                    >
                                         <AntDesign name="heart" size={30} color={this.checkFavourites(user)} />
                                     </TouchableHighlight>
 
                                 }
 
-                                // Component={Comentarios}
                                 bottomDivider
 
                             />
@@ -152,5 +220,53 @@ const mapStateToProps = (state) => {
         user: state.userReducer
     };
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#F5FCFF',
+    },
+    header: {
+        flexDirection: 'row',
+    },
+    input: {
+        marginLeft: 10,
+        marginTop: 10,
+        width: 250,
+        height: 40,
+        borderColor: 'green',
+        borderWidth: 1
+    },
+    button: {
+        alignItems: 'center',
+        width: 70,
+        height: 40,
+        backgroundColor: 'green',
+        borderRadius: 4,
+        marginLeft: 10,
+        marginTop: 10
+    },
+    textButton: {
+        marginTop: 10,
+    },
+    listItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: 350,
+        height: 70,
+        borderBottomWidth: StyleSheet.hairlineWidth,
+    },
+    buttonItem: {
+        alignItems: 'center',
+        width: 70,
+        height: 40,
+        backgroundColor: '#FF7979',
+        borderRadius: 2,
+        marginLeft: 10,
+    },
+    textItem: {
+        marginLeft: 30,
+    }
+});
 
 export default connect(mapStateToProps)(ItineraryScreen);
