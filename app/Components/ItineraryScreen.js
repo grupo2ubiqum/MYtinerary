@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios'
 import { Text, View, ScrollView, TouchableHighlight, StyleSheet, TextInput } from 'react-native';
-import { List, ListItem } from 'react-native-elements'
+import { List, ListItem, withTheme } from 'react-native-elements'
 import { FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import Comentarios from './Comentarios'
+import ActivityCarousel from './ActivityCarousel'
+
 import ImageWithName from './ImageWithName'
 import { connect } from "react-redux";
 
@@ -80,7 +81,7 @@ class ItineraryScreen extends React.Component {
 
     async addComment() {
 
-        if (this.props.user.username.length == 0) {
+        if(this.props.user.username.length == 0) {
             alert("Please log in to add comments")
             return
         }
@@ -94,7 +95,7 @@ class ItineraryScreen extends React.Component {
 
     async deleteComment(comentario, index, title) {
 
-        if (this.props.user.username.length == 0) {
+        if(this.props.user.username.length == 0){
             alert("Please log in to delete comments")
             return
         }
@@ -102,10 +103,10 @@ class ItineraryScreen extends React.Component {
         var city_name = this.state.city.name;
 
         axios.post(`https://mytinerary-grupo2.herokuapp.com/api/itineraries/del/${city_name}`, {
-                key: index,
-                comment: comentario,
-                title: title
-            })
+            key: index,
+            comment: comentario,
+            title: title
+        })
             .then(response => this.setState({ itineraries: response.data.itinerariesForACity }))
             .catch(error => console.log(error))
 
@@ -115,126 +116,104 @@ class ItineraryScreen extends React.Component {
 
         return (
 
-            <
-            ScrollView >
-            <
-            View style = {
-                { flex: 1, width: '90%' } } >
+            <ScrollView>
+                <View style={{ flex: 1, width: '90%' }}>
 
-            <
-            ImageWithName city = { this.state.city }
-            width = { "100%" }
-            navigate = { this.props.navigate }
-            />
+                    <ImageWithName city={this.state.city} width={"100%"} navigate={this.props.navigate} />
 
-            {
-                this.state.itineraries.length != 0 ?
+                    {this.state.itineraries.length != 0 ?
 
-                    this.state.itineraries.map((user, i) => {
+                        this.state.itineraries.map((user, i) => {
 
-                        return <ListItem key = { i }
+                            return <ListItem key={i}
 
-                        title = { user.username }
-                        subtitle = {
+                                title={user.username}
+                                subtitle={
 
-                            <
-                            View >
-                            <
-                            Text > { user.country } < /Text> <
-                            Text > { user.city } < /Text> <
-                            Text > { user.title } < /Text> <
-                            Text > { user.rating } < /Text> <
-                            Text > { user.duration } < /Text> <
-                            Text > { user.price } < /Text> <
-                            Text > { user.hashtags } < /Text>
+                                    <View>
+                                        <Text>{user.country}</Text>
+                                        <Text>{user.city}</Text>
+                                        <Text>{user.title}</Text>
+                                        <Text>{user.rating}</Text>
+                                        <Text>{user.duration}</Text>
+                                        <Text>{user.price}</Text>
+                                        <Text>{user.hashtags}</Text>
 
+{console.log(user.activities)}
+                                        <ActivityCarousel activities={user.activities} />
+                                        
 
-                            {
-                                user.comments.map((comentario, index) => {
-                                    return ( <
-                                        View key = { index } >
-                                        <
-                                        Text > { comentario } < /Text> <
-                                        TouchableHighlight style = { styles.button }
-                                        onPress = {
-                                            () => this.deleteComment(comentario, index, user.title)
-                                        } >
-                                        <
-                                        Text style = { styles.textButton } > Delete < /Text> <
-                                        /TouchableHighlight> <
-                                        /View>
-                                    )
+                                        {user.comments.map((comentario, index) => {
+                                            return (
+                                                <View key={index}>
+                                                    <Text>{comentario}</Text>
+                                                    <TouchableHighlight
+                                                        style={styles.button}
+                                                        onPress={
+                                                            () => this.deleteComment(comentario, index, user.title)} >
+                                                        <Text style={styles.textButton}>Delete</Text>
+                                                    </TouchableHighlight>
+                                                </View>
+                                            )
 
 
-                                })
-                            }
+                                        })}
 
-                            <
-                            TextInput
-                            style = { styles.input }
-                            onChangeText = {
-                                (text) => this.setState({ newComment: text, itineraryCommented: user.title }) } >
-                            <
-                            /TextInput>
+                                        <TextInput
+                                            style={styles.input}
+                                            onChangeText={(text) => this.setState({ newComment: text, itineraryCommented: user.title })}
+                                        >
+                                        </TextInput>
 
-                            <
-                            TouchableHighlight
-                            style = { styles.button }
-                            onPress = { this.addComment } >
-                            <
-                            Text style = { styles.textButton } > Comment < /Text> <
-                            /TouchableHighlight>
+                                        <TouchableHighlight
+                                            style={styles.button}
+                                            onPress={this.addComment} >
+                                            <Text style={styles.textButton}>Comment</Text>
+                                        </TouchableHighlight>
 
+                                    
 
-                            <
-                            /View>
-                        }
+                                    </View>
+                                }
 
-                        leftAvatar = {
-                            { source: { uri: user.userPhoto } } }
+                                leftAvatar={{ source: { uri: user.userPhoto } }}
 
 
-                        rightAvatar = { <
-                            TouchableHighlight
+                                rightAvatar={
+                                    <TouchableHighlight
 
-                            onPress = {
-                                () => {
+                                        onPress={
+                                            () => {
 
-                                    if (this.checkFavourites(user) === "black") {
-                                        this.changeFavourites(user, true)
-                                    } else {
-                                        this.changeFavourites(user, false)
-                                    }
+                                                if (this.checkFavourites(user) === "black") {
+                                                    this.changeFavourites(user, true)
+                                                } else {
+                                                    this.changeFavourites(user, false)
+                                                }
+
+                                            }}
+                                        {...this.state.isLoggedIn}
+                                    >
+                                    <AntDesign name="heart" size={30} color={this.checkFavourites(user)} />
+                                    </TouchableHighlight>
 
                                 }
-                            } {...this.state.isLoggedIn } >
-                            <
-                            AntDesign name = "heart"
-                            size = { 30 }
-                            color = { this.checkFavourites(user) }
-                            /> <
-                            /TouchableHighlight>
+
+                                bottomDivider
+
+                            />
 
                         }
+                        )
 
-                        bottomDivider
+                        :
 
-                            /
-                            >
+                        <Text>No itineraries available for this city</Text>
 
-                    })
-
-                :
-
-                <
-                Text > No itineraries available
-                for this city < /Text>
-
-            } <
-            Comentarios / >
-            <
-            /View> <
-            /ScrollView>
+                    }
+    
+                </View>
+            </ScrollView>
         );
     }
 }
@@ -258,20 +237,21 @@ const styles = StyleSheet.create({
         marginTop: 10,
         width: 250,
         height: 40,
-        borderColor: 'green',
+        borderColor: 'red',
         borderWidth: 1
     },
     button: {
         alignItems: 'center',
         width: 70,
         height: 40,
-        backgroundColor: 'green',
+        backgroundColor: 'blue',
         borderRadius: 4,
         marginLeft: 10,
         marginTop: 10
     },
     textButton: {
         marginTop: 10,
+        color: 'white'
     },
     listItem: {
         flexDirection: 'row',
