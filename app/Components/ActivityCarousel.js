@@ -4,7 +4,7 @@ import { Image } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { AntDesign  } from '@expo/vector-icons'
 
-export default class CityCarousel extends React.Component {
+export default class ActivityCarousel extends React.Component {
   constructor(props){
     super();
     this.state = {
@@ -12,49 +12,7 @@ export default class CityCarousel extends React.Component {
     }
 
     this.props = props;
-    this.init();
-  }
-
-  init(){
-    this.state = {
-      com:[ 
-        {name: 'London',
-         address: '123',
-         photo: '.jpg',
-         time: '2hs',
-         cost: '$5000',
-         comments: 'Food is super cheap, the only reason its so expensive is because we stayed and kept ordering canyas (beers) :L Really cool square, people come and sit with their own beers and chill in the sun. Super Guay!'
-      },
-        {name: 'Barcelona',
-        address: '123',
-        photo: '.jpg',
-        time: '2hs',
-        cost: '$5000',
-        comments: 'que tal'
-      },
-        {name: 'BsAs',
-        address: '123',
-        photo: '.jpg',
-        time: '2hs',
-        cost: '$5000',
-        comments: 'que tal'
-      },
-        {name: 'Mordor',
-        address: '123',
-        photo: '.jpg',
-        time: '2hs',
-        cost: '$5000',
-        comments: 'que tal'
-      },
-        {name: 'Londor',
-        address: '123',
-        photo: '.jpg',
-        time: '2hs',
-        cost: '$5000',
-        comments: 'que tal'
-        }
-      ]
-    }
+    // this.init();
   }
 
   _renderItem = ( {item, index} ) => {
@@ -63,23 +21,27 @@ export default class CityCarousel extends React.Component {
     return (
       <View style={styles.container}>
           <Text key={index} style={{fontWeight: "bold"}}>
-              Name: {item.name}{'\n'}
-              Address: {item.address}{'\n'}
-              Photo: {item.photo}{'\n'}
-              Time: {item.time}{'\n'}
-              Cost: {item.cost}{'\n'}
-              Comments: {item.comments}{'\n'}
+              Name: {item.Name}{'\n'}
+              Address: {item.Address}{'\n'}
+              Photo: {item.Photo}{'\n'}
+              Time: {item.Time}{'\n'}
+              Cost: {item.Cost}{'\n'}
+              Comments: {item.Comments}{'\n'}
           </Text>
       </View>
     );
   }
 
   render = () => {
-    return (<View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+    console.log(this.props.activities)
+    return (
+   
+   
+      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
               <AntDesign name="leftcircle" size={30} />
 
       <Carousel
-                data={this.state.com}
+                data={this.props.activities}
                 renderItem={this._renderItem.bind(this)}
                 sliderWidth={300}
                 itemWidth={210}

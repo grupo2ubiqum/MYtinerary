@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios'
 import { Text, View, ScrollView, TouchableHighlight, StyleSheet, TextInput } from 'react-native';
-import { List, ListItem } from 'react-native-elements'
+import { List, ListItem, withTheme } from 'react-native-elements'
 import { FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import Comentarios from './Comentarios'
+import ActivityCarousel from './ActivityCarousel'
+
 import ImageWithName from './ImageWithName'
 import { connect } from "react-redux";
 
@@ -138,6 +139,9 @@ class ItineraryScreen extends React.Component {
                                         <Text>{user.price}</Text>
                                         <Text>{user.hashtags}</Text>
 
+{console.log(user.activities)}
+                                        <ActivityCarousel activities={user.activities} />
+                                        
 
                                         {user.comments.map((comentario, index) => {
                                             return (
@@ -167,6 +171,7 @@ class ItineraryScreen extends React.Component {
                                             <Text style={styles.textButton}>Comment</Text>
                                         </TouchableHighlight>
 
+                                    
 
                                     </View>
                                 }
@@ -189,7 +194,7 @@ class ItineraryScreen extends React.Component {
                                             }}
                                         {...this.state.isLoggedIn}
                                     >
-                                        <AntDesign name="heart" size={30} color={this.checkFavourites(user)} />
+                                    <AntDesign name="heart" size={30} color={this.checkFavourites(user)} />
                                     </TouchableHighlight>
 
                                 }
@@ -206,7 +211,7 @@ class ItineraryScreen extends React.Component {
                         <Text>No itineraries available for this city</Text>
 
                     }
-
+    
                 </View>
             </ScrollView>
         );
@@ -232,20 +237,21 @@ const styles = StyleSheet.create({
         marginTop: 10,
         width: 250,
         height: 40,
-        borderColor: 'green',
+        borderColor: 'red',
         borderWidth: 1
     },
     button: {
         alignItems: 'center',
         width: 70,
         height: 40,
-        backgroundColor: 'green',
+        backgroundColor: 'blue',
         borderRadius: 4,
         marginLeft: 10,
         marginTop: 10
     },
     textButton: {
         marginTop: 10,
+        color: 'white'
     },
     listItem: {
         flexDirection: 'row',
