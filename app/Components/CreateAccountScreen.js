@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, TextInput, Text, View, TouchableOpacity, Image, ScrollView, Button } from 'react-native'
 import { connect } from "react-redux";
 import { logUser } from "../Store/Actions/userActions";
+import HomeComponent from './HomeComponent';
 import axios from 'axios'
 
 class CreateAccountScreen extends React.Component {
@@ -120,9 +121,7 @@ class CreateAccountScreen extends React.Component {
                         <Text style={styles.colortextbutton}>SUBMIT</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.imgHome} onPress={() => navigate('Home')}>
-                        <Image style={styles.logoSolo} source={require('../assets/img/homeIcon.png')} />
-                    </TouchableOpacity>
+                    <HomeComponent navigate={navigate}/>
 
                 </View>
 

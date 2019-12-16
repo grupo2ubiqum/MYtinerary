@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, ScrollView, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import axios from 'axios';
 import ImageWithName from './ImageWithName';
+import HomeComponent from './HomeComponent';
 
 class CitiesScreen extends React.Component {
     constructor(props) {
@@ -46,7 +47,7 @@ class CitiesScreen extends React.Component {
 
     render() {
         const { navigate } = this.props.navigation;
-        return (
+        return (<View >
             <ScrollView contentContainerStyle={styles.container}>
                 <TextInput
                     style={{width: '90%', height: 50, textAlign: 'center'}}
@@ -64,14 +65,10 @@ class CitiesScreen extends React.Component {
                             <ImageWithName key={index} city={city} width='100%' navigate={navigate}/>
                         ))}
                     </View>
-                }           
-
-                <View>
-                    <TouchableOpacity onPress={() => navigate('Home')}>
-                        <Image style={styles.logoSolo} source={require('../assets/img/homeIcon.png')}/>
-                    </TouchableOpacity>
-                </View>
+                }
             </ScrollView>
+            <HomeComponent navigate={navigate}/>
+            </View>
         )
     }
 }
@@ -80,11 +77,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         justifyContent: 'center', 
-        alignItems: 'center'
     },
     logoSolo: {
         height: 80,
         width: 80,
+
         },
 });
 export default CitiesScreen;

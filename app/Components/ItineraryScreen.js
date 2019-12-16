@@ -1,13 +1,14 @@
 import React from 'react';
 import axios from 'axios'
-import { Text, View, ScrollView, TouchableHighlight, StyleSheet, TextInput } from 'react-native';
-import { List, ListItem } from 'react-native-elements'
+import { Text, View, ScrollView, TouchableHighlight, StyleSheet, TextInput,Image } from 'react-native';
+import { List, ListItem, withTheme } from 'react-native-elements'
 import { FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import Comentarios from './Comentarios';
-import ImageWithName from './ImageWithName';
-import { connect } from "react-redux";
 import ActivityCarousel from './ActivityCarousel';
+import HomeComponent from './HomeComponent';
+
+import ImageWithName from './ImageWithName'
+import { connect } from "react-redux";
 
 class ItineraryScreen extends React.Component {
 
@@ -19,8 +20,10 @@ class ItineraryScreen extends React.Component {
         this.state = {
             city: this.props.navigation.state.params.city,
             itineraries: [],
-            fav: "black",
-            type:"heart"
+            fav: "red",
+            type: "heart",
+            newComment: '',
+            itineraryCommented: ''
         }
 
         this.addComment = this.addComment.bind(this)
@@ -111,11 +114,11 @@ class ItineraryScreen extends React.Component {
     }
 
     render = () => {
-
+        const { navigate } = this.props.navigation;
         return (
-
+            <View>
             <ScrollView>
-                <View style={{ flex: 1, width: '90%' }}>
+                <View style={{ flex: 1, width: '90%', marginBottom:'13%'}}>
 
                     <ImageWithName city={this.state.city} width={"100%"} navigate={this.props.navigate} />
 
@@ -129,17 +132,18 @@ class ItineraryScreen extends React.Component {
                                 subtitle={
 
                                     <View>
-{console.log(user.activities)}
-                                        <ActivityCarousel />
-
-                                        <Text>{user.country}</Text>
-                                        <Text>{user.city}</Text>
-                                        <Text>{user.title}</Text>
-                                        <Text>{user.rating}</Text>
-                                        <Text>{user.duration}</Text>
-                                        <Text>{user.price}</Text>
-                                        <Text>{user.hashtags}</Text>
-
+                                        <View style={{marginBottom:'25%'}}>
+                                            <Text>{user.country}</Text>
+                                            <Text>{user.city}</Text>
+                                            <Text>{user.title}</Text>
+                                            <Text>{user.rating}</Text>
+                                            <Text>{user.duration}</Text>
+                                            <Text>{user.price}</Text>
+                                            <Text>{user.hashtags}</Text>
+                                        </View>    
+                                        {console.log(user.activities)}
+                                        <ActivityCarousel activities={user.activities} />
+                                        
 
                                         {user.comments.map((comentario, index) => {
                                             return (
@@ -169,6 +173,7 @@ class ItineraryScreen extends React.Component {
                                             <Text style={styles.textButton}>Comment</Text>
                                         </TouchableHighlight>
 
+                                    
 
                                     </View>
                                 }
@@ -191,7 +196,7 @@ class ItineraryScreen extends React.Component {
                                             }}
                                         {...this.state.isLoggedIn}
                                     >
-                                        <AntDesign name="heart" size={30} color={this.checkFavourites(user)} />
+                                    <AntDesign name="heart" size={30} color={this.checkFavourites(user)} />
                                     </TouchableHighlight>
 
                                 }
@@ -204,13 +209,17 @@ class ItineraryScreen extends React.Component {
                         )
 
                         :
+                        <View style={{height:425, backgroundColor:"white",justifyContent:'center',alignItems:'center'}}>
 
-                        <Text>No itineraries available for this city</Text>
-
+                            <Image source={require('../assets/loading.gif')} style={{width:200, height:200 }} />
+                        
+                        </View>
                     }
-
+    
                 </View>
             </ScrollView>
+            <HomeComponent navigate={navigate}/>
+            </View>
         );
     }
 }
@@ -225,6 +234,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F5FCFF',
+        
     },
     header: {
         flexDirection: 'row',
@@ -234,20 +244,21 @@ const styles = StyleSheet.create({
         marginTop: 10,
         width: 250,
         height: 40,
-        borderColor: 'green',
+        borderColor: 'red',
         borderWidth: 1
     },
     button: {
         alignItems: 'center',
         width: 70,
         height: 40,
-        backgroundColor: 'green',
+        backgroundColor: 'blue',
         borderRadius: 4,
         marginLeft: 10,
         marginTop: 10
     },
     textButton: {
         marginTop: 10,
+        color: 'white'
     },
     listItem: {
         flexDirection: 'row',
