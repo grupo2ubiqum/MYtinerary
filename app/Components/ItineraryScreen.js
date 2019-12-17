@@ -118,7 +118,7 @@ class ItineraryScreen extends React.Component {
         return (
             <View>
             <ScrollView>
-                <View style={{ flex: 1, width: '90%', marginBottom:'13%'}}>
+                <View style={{ flex: 1, width: '90%', marginBottom:'13%',backgroundColor:'#fafafa'}}>
 
                     <ImageWithName city={this.state.city} width={"100%"} navigate={this.props.navigate} />
 
@@ -133,13 +133,12 @@ class ItineraryScreen extends React.Component {
 
                                     <View>
                                         <View style={{marginBottom:'25%'}}>
-                                            <Text>{user.country}</Text>
-                                            <Text>{user.city}</Text>
-                                            <Text>{user.title}</Text>
-                                            <Text>{user.rating}</Text>
-                                            <Text>{user.duration}</Text>
-                                            <Text>{user.price}</Text>
-                                            <Text>{user.hashtags}</Text>
+                                            <Text></Text>
+                                             
+                                            <Text>Likes: {user.rating}</Text>
+                                            <Text>Duration: {user.duration}</Text>
+                                            <Text>Price: {user.price}</Text>
+                                            <Text style={{textDecorationLine:'underline'}}>{user.hashtags}</Text>
                                         </View>    
                                         {console.log(user.activities)}
                                         <ActivityCarousel activities={user.activities} />
@@ -147,14 +146,15 @@ class ItineraryScreen extends React.Component {
 
                                         {user.comments.map((comentario, index) => {
                                             return (
-                                                <View key={index}>
-                                                    <Text>{comentario}</Text>
+                                                <View key={index} style={{marginTop:'10%',backgroundColor:'#FAFAFA'}}>
+                                                    
                                                     <TouchableHighlight
-                                                        style={styles.button}
+                                                        style={styles.close}
                                                         onPress={
                                                             () => this.deleteComment(comentario, index, user.title)} >
-                                                        <Text style={styles.textButton}>Delete</Text>
+                                                        <AntDesign name="closecircle" size={20}/>
                                                     </TouchableHighlight>
+                                                    <Text>{comentario}</Text>
                                                 </View>
                                             )
 
@@ -202,7 +202,6 @@ class ItineraryScreen extends React.Component {
                                 }
 
                                 bottomDivider
-
                             />
 
                         }
@@ -236,6 +235,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
         
     },
+    close:{
+        alignItems:"flex-end",
+    },
     header: {
         flexDirection: 'row',
     },
@@ -251,7 +253,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 70,
         height: 40,
-        backgroundColor: 'blue',
+        backgroundColor: 'red',
         borderRadius: 4,
         marginLeft: 10,
         marginTop: 10

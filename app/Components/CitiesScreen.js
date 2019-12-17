@@ -47,10 +47,12 @@ class CitiesScreen extends React.Component {
 
     render() {
         const { navigate } = this.props.navigation;
-        return (<View >
+        return (<View>
+            <View style={{marginBottom:"0%"}}>
             <ScrollView contentContainerStyle={styles.container}>
                 <TextInput
-                    style={{width: '90%', height: 50, textAlign: 'center'}}
+                    style={{width: '90%', height: 50, textAlign: 'center', borderLeftWidth: 1,
+                    borderRightWidth: 1,borderBottomWidth:1,borderTopWidth:1}}
                     name="inputValue"
                     placeholder="Search city"
                     onChangeText={this.handleChange}
@@ -66,7 +68,7 @@ class CitiesScreen extends React.Component {
                         ))}
                     </View>
                 }
-            </ScrollView>
+            </ScrollView></View>
             <HomeComponent navigate={navigate}/>
             </View>
         )

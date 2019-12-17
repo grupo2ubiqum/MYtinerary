@@ -22,14 +22,12 @@ export default class ActivityCarousel extends React.Component {
   
     return (
       <View style={styles.container}>
-          <Text key={index} style={{fontWeight: "bold"}}>
-              Name: {item.Name}{'\n'}
-              Address: {item.Address}{'\n'}
-              Photo: {item.Photo}{'\n'}
-              Time: {item.Time}{'\n'}
-              Cost: {item.Cost}{'\n'}
-              Comments: {item.Comments}{'\n'}
-          </Text>
+        <Text key={index} style={{fontWeight: "bold",textAlign:"left"}}  >
+          {item.Name}{'\n'}
+        </Text>
+        <Text>
+              {item.Comments}{'\n'}
+        </Text>
       </View>
     );
   }
@@ -39,8 +37,8 @@ export default class ActivityCarousel extends React.Component {
     return (
    
    
-      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-              <AntDesign name="leftcircle" size={30} />
+      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center',backgroundColor:'#fafafa',width:'100%'}}>
+              <AntDesign name="left" size={20} />
 
         <Carousel
                   data={this.props.activities}
@@ -48,7 +46,7 @@ export default class ActivityCarousel extends React.Component {
                   sliderWidth={100}
                   itemWidth={200}
               />
-        <AntDesign name="rightcircle" size={30} />
+        <AntDesign name="right" size={20} />
 
     </View>
             
@@ -62,7 +60,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    width: '600%',
+    textAlign:'left',
+    
   },
   image: {
     width: '55%', 

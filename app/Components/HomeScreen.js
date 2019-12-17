@@ -34,7 +34,7 @@ class HomeScreen extends React.Component {
                 
             </View>
             </ScrollView>
-            <HomeComponent navigate={navigate}/>
+          
             </View>
         )
     }
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginTop: "10%",
-        marginBottom: "30%",
+        marginBottom: "10%",
     },
     imgHome: {
         alignItems: 'flex-end',
