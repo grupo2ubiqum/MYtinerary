@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, TextInput, Text, View, KeyboardAvoidingView, TouchableOpacity, Image, Button } from 'react-native'
 import { connect } from "react-redux";
 import { logUser } from "../Store/Actions/userActions";
+import HomeComponent from './HomeComponent';
 
 class LoginScreen extends React.Component {
 
@@ -58,7 +59,7 @@ class LoginScreen extends React.Component {
         return (
 
             <View style={styles.container}>
-                <Image style={styles.imgLogo} source={require('../assets/img/MYtineraryLogo2.png')} />
+                <Image style={styles.imgLogo} source={require('../assets/img/myTin.jpg')} />
 
                 <TextInput
                     placeholder="Username or email"
@@ -77,9 +78,7 @@ class LoginScreen extends React.Component {
                     <Text style={styles.colortextbutton}>LOGIN</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.imgHome} onPress={() => navigate('Home')}>
-                    <Image style={styles.logoSolo} source={require('../assets/img/homeIcon.png')} />
-                </TouchableOpacity>
+                <HomeComponent navigate={navigate}/>
 
             </View>
         );
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'lightgrey',
         padding: 20,
         // justifyContent: 'center'
-        justifyContent: 'space-between'
+        //justifyContent: 'space-between'
     },
     logoSolo: {
         justifyContent: 'flex-end',

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { StyleSheet, TextInput, Text, View, TouchableOpacity, Image, ScrollView, Button } from 'react-native'
+import { StyleSheet, TextInput, Text, View, TouchableOpacity, Image, ScrollView, Button,KeyboardAvoidingView } from 'react-native'
 import { connect } from "react-redux";
 import { logUser } from "../Store/Actions/userActions";
+import HomeComponent from './HomeComponent';
 import axios from 'axios'
 
 class CreateAccountScreen extends React.Component {
@@ -66,12 +67,12 @@ class CreateAccountScreen extends React.Component {
         const { navigate } = this.props.navigation;
 
         return (
-
-            <ScrollView>
+<KeyboardAvoidingView behavior={'height'} keyboardVerticalOffset={100} >
+            <ScrollView contentContainerStyle={{justifyContent:'space-between'}}>
             
                 <View style={styles.container}>
             
-                    <Image style={styles.imgLogo} source={require('../assets/img/MYtineraryLogo2.png')} />
+                    <Image style={styles.imgLogo} source={require('../assets/img/myTin.jpg')} />
 
                     <TextInput
                         placeholder="Username"
@@ -120,13 +121,13 @@ class CreateAccountScreen extends React.Component {
                         <Text style={styles.colortextbutton}>SUBMIT</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.imgHome} onPress={() => navigate('Home')}>
-                        <Image style={styles.logoSolo} source={require('../assets/img/homeIcon.png')} />
-                    </TouchableOpacity>
+                    
 
                 </View>
-
+                <HomeComponent navigate={navigate}/>
             </ScrollView>
+           
+            </KeyboardAvoidingView>
         );
     }
 }

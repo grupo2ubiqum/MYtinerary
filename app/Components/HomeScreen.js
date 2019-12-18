@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, Button, View, StyleSheet, Image, ScrollView,TouchableOpacity,AsyncStorage} from 'react-native';
 import CityCarousel from './CityCarousel';
+import HomeComponent from './HomeComponent';
 
 
 class HomeScreen extends React.Component {
@@ -10,11 +11,11 @@ class HomeScreen extends React.Component {
 
     render() {
         const { navigate } = this.props.navigation;
-        return (
+        return (<View>
             <ScrollView >
             <View style={styles.container}>
                 <View style={styles.imgLogo}>
-                <Image source={require('../assets/img/MYtineraryLogo2.png')} />
+                <Image source={require('../assets/img/myTin.jpg')} />
                 </View>
                 <View style={styles.texto1}>
                     <Text>
@@ -29,12 +30,12 @@ class HomeScreen extends React.Component {
                 </TouchableOpacity>
                 <CityCarousel navigate={navigate}/>
                 
-                <TouchableOpacity style={styles.imgHome} onPress={() => navigate('Home')}>
-                    <Image style={styles.logoSolo} source={require('../assets/img/homeIcon.png')}/>
-                </TouchableOpacity>
+                
                 
             </View>
             </ScrollView>
+          
+            </View>
         )
     }
 }
@@ -44,7 +45,9 @@ const styles = StyleSheet.create({
         height: "100%",
         width: "100%",
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginTop: "10%",
+        marginBottom: "10%",
     },
     imgHome: {
         alignItems: 'flex-end',
@@ -54,6 +57,7 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         alignItems: 'center',
+        //fontFamily: 'Roboto'
         
     },
     logoSolo: {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, ScrollView, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import axios from 'axios';
 import ImageWithName from './ImageWithName';
+import HomeComponent from './HomeComponent';
 
 class CitiesScreen extends React.Component {
     constructor(props) {
@@ -46,10 +47,12 @@ class CitiesScreen extends React.Component {
 
     render() {
         const { navigate } = this.props.navigation;
-        return (
+        return (<View>
+            <View style={{marginTop:5}}>
             <ScrollView contentContainerStyle={styles.container}>
                 <TextInput
-                    style={{width: '90%', height: 50, textAlign: 'center'}}
+                    style={{width: '90%', height: 50, textAlign: 'center', borderLeftWidth: 1,
+                    borderRightWidth: 1,borderBottomWidth:1,borderTopWidth:1}}
                     name="inputValue"
                     placeholder="Search city"
                     onChangeText={this.handleChange}
@@ -57,21 +60,20 @@ class CitiesScreen extends React.Component {
                 />
 
                 {this.state.cityNotFound ? 
-                    <Text>City not found.</Text>
+                    <View style={{marginBottom:'144%'}}><Text>City not found.</Text></View>
                      :
                     <View style={{ width: '90%' }}>
                         {this.state.filteredCities.map((city, index) => (
-                            <ImageWithName key={index} city={city} width='100%' navigate={navigate}/>
+                            <TouchableOpacity key={index} style={{margin: 5}} onPress={() => navigate('Itinerary', {city: city})}>
+                            <ImageWithName city={city}/>
+                        </TouchableOpacity>
                         ))}
                     </View>
-                }           
-
-                <View>
-                    <TouchableOpacity onPress={() => navigate('Home')}>
-                        <Image style={styles.logoSolo} source={require('../assets/img/homeIcon.png')}/>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
+                }
+            </ScrollView><View style={{background:'red',width:'100%',heigth:'100%'}} />
+            </View>
+            <HomeComponent navigate={navigate}/>
+            </View>
         )
     }
 }
@@ -80,11 +82,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         justifyContent: 'center', 
-        alignItems: 'center'
+        alignContent: 'center'
     },
     logoSolo: {
         height: 80,
         width: 80,
+
         },
 });
 export default CitiesScreen;

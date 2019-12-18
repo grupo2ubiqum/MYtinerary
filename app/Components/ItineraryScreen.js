@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios'
-import { Text, View, ScrollView, TouchableHighlight, StyleSheet, TextInput } from 'react-native';
+import { Text, View, ScrollView, TouchableHighlight, StyleSheet, TextInput,Image } from 'react-native';
 import { List, ListItem, withTheme } from 'react-native-elements'
 import { FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import ActivityCarousel from './ActivityCarousel'
+import ActivityCarousel from './ActivityCarousel';
+import HomeComponent from './HomeComponent';
 
 import ImageWithName from './ImageWithName'
 import { connect } from "react-redux";
@@ -113,13 +114,13 @@ class ItineraryScreen extends React.Component {
     }
 
     render = () => {
-
+        const { navigate } = this.props.navigation;
         return (
-
+            <View>
             <ScrollView>
-                <View style={{ flex: 1, width: '90%' }}>
+                <View style={{ flex: 1, width: '90%', marginBottom:'13%',backgroundColor:'#fafafa'}}>
 
-                    <ImageWithName city={this.state.city} width={"100%"} navigate={this.props.navigate} />
+                    <ImageWithName city={this.state.city} />
 
                     {this.state.itineraries.length != 0 ?
 
@@ -131,28 +132,29 @@ class ItineraryScreen extends React.Component {
                                 subtitle={
 
                                     <View>
-                                        <Text>{user.country}</Text>
-                                        <Text>{user.city}</Text>
-                                        <Text>{user.title}</Text>
-                                        <Text>{user.rating}</Text>
-                                        <Text>{user.duration}</Text>
-                                        <Text>{user.price}</Text>
-                                        <Text>{user.hashtags}</Text>
-
-{console.log(user.activities)}
+                                        <View style={{marginBottom:'25%'}}>
+                                            <Text></Text>
+                                             
+                                            <Text>Likes: {user.rating}</Text>
+                                            <Text>Duration: {user.duration}</Text>
+                                            <Text>Price: {user.price}</Text>
+                                            <Text style={{textDecorationLine:'underline'}}>{user.hashtags}</Text>
+                                        </View>    
+                                        {console.log(user.activities)}
                                         <ActivityCarousel activities={user.activities} />
                                         
 
                                         {user.comments.map((comentario, index) => {
                                             return (
-                                                <View key={index}>
-                                                    <Text>{comentario}</Text>
+                                                <View key={index} style={{marginTop:'10%',backgroundColor:'#FAFAFA'}}>
+                                                    
                                                     <TouchableHighlight
-                                                        style={styles.button}
+                                                        style={styles.close}
                                                         onPress={
                                                             () => this.deleteComment(comentario, index, user.title)} >
-                                                        <Text style={styles.textButton}>Delete</Text>
+                                                        <AntDesign name="closecircle" size={20}/>
                                                     </TouchableHighlight>
+                                                    <Text>{comentario}</Text>
                                                 </View>
                                             )
 
@@ -200,20 +202,23 @@ class ItineraryScreen extends React.Component {
                                 }
 
                                 bottomDivider
-
                             />
 
                         }
                         )
 
                         :
+                        <View style={{height:425, backgroundColor:"white",justifyContent:'center',alignItems:'center'}}>
 
-                        <Text>No itineraries available for this city</Text>
-
+                            <Image source={require('../assets/loading.gif')} style={{width:200, height:200 }} />
+                        
+                        </View>
                     }
     
                 </View>
             </ScrollView>
+            <HomeComponent navigate={navigate}/>
+            </View>
         );
     }
 }
@@ -228,6 +233,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F5FCFF',
+        
+    },
+    close:{
+        alignItems:"flex-end",
     },
     header: {
         flexDirection: 'row',
@@ -244,7 +253,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 70,
         height: 40,
-        backgroundColor: 'blue',
+        backgroundColor: 'red',
         borderRadius: 4,
         marginLeft: 10,
         marginTop: 10
