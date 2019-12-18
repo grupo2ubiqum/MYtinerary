@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image ,TouchableOpacity} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import ImageWithName from './ImageWithName';
 import axios from 'axios';
@@ -59,7 +59,9 @@ export default class CityCarousel extends React.Component {
     return (
       <View style={styles.container}>
         {item.map((img, index) =>
-          <ImageWithName key={index} city={img} navigate={this.props.navigate}/>
+          <TouchableOpacity key={index} style={{margin: 5, width:'45%'}} onPress={() => this.props.navigate('Itinerary', {city: img})}>
+          <ImageWithName city={img}/>
+      </TouchableOpacity>
         )}
       </View>
     );
@@ -79,7 +81,7 @@ export default class CityCarousel extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%', 
+    width: '95%', 
     height: '100%',
     flex: 1,
     flexDirection: 'row',

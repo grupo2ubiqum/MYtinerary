@@ -15,7 +15,7 @@ class HomeScreen extends React.Component {
             <ScrollView >
             <View style={styles.container}>
                 <View style={styles.imgLogo}>
-                <Image source={require('../assets/img/MYtineraryLogo2.png')} />
+                <Image source={require('../assets/img/myTin.jpg')} />
                 </View>
                 <View style={styles.texto1}>
                     <Text>

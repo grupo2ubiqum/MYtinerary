@@ -120,7 +120,7 @@ class ItineraryScreen extends React.Component {
             <ScrollView>
                 <View style={{ flex: 1, width: '90%', marginBottom:'13%',backgroundColor:'#fafafa'}}>
 
-                    <ImageWithName city={this.state.city} width={"100%"} navigate={this.props.navigate} />
+                    <ImageWithName city={this.state.city} />
 
                     {this.state.itineraries.length != 0 ?
 

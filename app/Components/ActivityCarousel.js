@@ -35,8 +35,7 @@ export default class ActivityCarousel extends React.Component {
   render = () => {
     console.log(this.props.activities)
     return (
-   
-   
+      
       <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between',alignItems:'center',backgroundColor:'#fafafa',width:'100%'}}>
               <AntDesign name="left" size={20} />
 
@@ -46,6 +45,7 @@ export default class ActivityCarousel extends React.Component {
                   sliderWidth={100}
                   itemWidth={200}
               />
+              
         <AntDesign name="right" size={20} />
 
     </View>

@@ -48,7 +48,7 @@ class CitiesScreen extends React.Component {
     render() {
         const { navigate } = this.props.navigation;
         return (<View>
-            <View style={{marginBottom:"0%"}}>
+            <View style={{marginTop:5}}>
             <ScrollView contentContainerStyle={styles.container}>
                 <TextInput
                     style={{width: '90%', height: 50, textAlign: 'center', borderLeftWidth: 1,
@@ -60,15 +60,18 @@ class CitiesScreen extends React.Component {
                 />
 
                 {this.state.cityNotFound ? 
-                    <Text>City not found.</Text>
+                    <View style={{marginBottom:'144%'}}><Text>City not found.</Text></View>
                      :
                     <View style={{ width: '90%' }}>
                         {this.state.filteredCities.map((city, index) => (
-                            <ImageWithName key={index} city={city} width='100%' navigate={navigate}/>
+                            <TouchableOpacity key={index} style={{margin: 5}} onPress={() => navigate('Itinerary', {city: city})}>
+                            <ImageWithName city={city}/>
+                        </TouchableOpacity>
                         ))}
                     </View>
                 }
-            </ScrollView></View>
+            </ScrollView><View style={{background:'red',width:'100%',heigth:'100%'}} />
+            </View>
             <HomeComponent navigate={navigate}/>
             </View>
         )
@@ -79,6 +82,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         justifyContent: 'center', 
+        alignContent: 'center'
     },
     logoSolo: {
         height: 80,

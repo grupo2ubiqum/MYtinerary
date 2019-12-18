@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, TextInput, Text, View, TouchableOpacity, Image, ScrollView, Button } from 'react-native'
+import { StyleSheet, TextInput, Text, View, TouchableOpacity, Image, ScrollView, Button,KeyboardAvoidingView } from 'react-native'
 import { connect } from "react-redux";
 import { logUser } from "../Store/Actions/userActions";
 import HomeComponent from './HomeComponent';
@@ -67,8 +67,8 @@ class CreateAccountScreen extends React.Component {
         const { navigate } = this.props.navigation;
 
         return (
-
-            <ScrollView>
+<KeyboardAvoidingView behavior={'height'} keyboardVerticalOffset={100} >
+            <ScrollView contentContainerStyle={{justifyContent:'space-between'}}>
             
                 <View style={styles.container}>
             
@@ -121,11 +121,13 @@ class CreateAccountScreen extends React.Component {
                         <Text style={styles.colortextbutton}>SUBMIT</Text>
                     </TouchableOpacity>
 
-                    <HomeComponent navigate={navigate}/>
+                    
 
                 </View>
-
+                <HomeComponent navigate={navigate}/>
             </ScrollView>
+           
+            </KeyboardAvoidingView>
         );
     }
 }
