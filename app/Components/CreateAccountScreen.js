@@ -72,7 +72,7 @@ class CreateAccountScreen extends React.Component {
             
                 <View style={styles.container}>
             
-                    <Image style={styles.imgLogo} source={require('../assets/img/MYtineraryLogo2.png')} />
+                    <Image style={styles.imgLogo} source={require('../assets/img/myTin.jpg')} />
 
                     <TextInput
                         placeholder="Username"
